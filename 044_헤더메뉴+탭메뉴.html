@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>헤더메뉴 + 탭메뉴</title>
+    <style>
+        @font-face {
+            font-family: 'EF_watermelonSalad';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body {
+            line-height: 1;
+            color: #333;
+        }
+
+        header {
+            width: 100%;
+            height: 70px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: #ffffff79;
+            backdrop-filter: blur(10px);
+            /* 배경컬러에 흐림값을 줌 */
+            
+        }
+
+        header .inner {
+            width: calc(100% - 40px);
+            height: 100%;
+            /* 높이값 까지 작성이 이루어져야 align-items: center; 가 구현됨  */
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            
+        }
+
+        header .inner nav {
+            position: absolute;
+            /* position: relative; 를 따로 작성하지 않으면 브라우져 안에서 움직이게 됨 */
+            right: 0;
+            top: 70px;
+            /* 헤더값과 동일하게 */
+            background-color: rgb(205, 205, 235);
+            display: none;
+        }
+        header .inner nav li {
+            padding: 20px;
+        }
+
+        header .inner img {
+            /* 로고의 이미지 크기를 한꺼번에 설정 가능 */
+            height: 40px;
+        }
+        .main_visual {
+            height: 100vh;
+           
+        }
+        .main_visual img {
+            width:100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .cont01 {
+            width: calc(100% - 40px);
+            margin: 100px auto;
+        }
+        .cont01 .tap_menu {
+            margin-bottom: 30px;
+        }
+        .cont01 .tap_menu li {
+            display: inline-block;
+            padding: 10px ;
+            cursor: pointer;
+        }
+        .cont01 .tap_menu li:first-child {
+            border-bottom: 1px solid #333;
+        }
+        .cont01 .tap_cont {
+            height: 350px;
+            
+        }
+        .cont01 .tap_cont img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="inner">
+            <h1>
+                <a href="#">
+                    <img src="img/logo/icons8-하트-64.png" alt="하트" />
+                </a>
+            </h1>
+            <div class="menu_icon">
+                <img src="img/logo/icons8-둥근-메뉴-50.png" alt="메뉴보기" />
+            </div><!-- menu_icon end -->
+            <nav>
+                <ul>
+                    <li><a href="#">새로나온책</a></li>
+                    <li><a href="#">베스트셀러</a></li>
+                    <li><a href="#">어린이도서</a></li>
+                    <li><a href="#">수험정보센터</a></li>
+                    <li><a href="#">영광문화</a></li>
+                </ul>
+            </nav>
+        </div><!-- .inner end -->
+    </header>
+    <section class="main_visual">
+        <img src="img/044_1.jpg" alt="" />
+    </section><!-- .main_visual end -->
+    <section class="cont01">
+        <ul class="tap_menu">
+            <li>베스트셀러</li>
+            <li>기획테마</li>
+            <li>분야별시간</li>
+        </ul><!-- .tap_menu end -->
+        <div class="tap_cont">
+            <img src="img/044_2.jpg" alt="" />
+        </div><!-- .tap_cont end -->
+    </section><!-- .cont01 end -->
+
+    <script>
+        //메뉴를 클릭했을 때
+        //조건식(nav가 display none과 같을 때)
+        //nav를 display:block으로 설정
+        let menuIcon = document.getElementsByClassName('menu_icon')[0];
+        let menu = document.getElementsByTagName('nav')[0];
+
+        menu.style.display = 'none';
+        //menu.style.display = 'none'; 를 미리 앞에 잡아줌
+        menuIcon.onclick = function(){
+            if(menu.style.display == 'none'){
+                menu.style.display = 'block'
+            } else {
+                menu.style.display = 'none'
+            }
+        }
+
+       //메뉴클릭(탭메뉴), 이미지 나타나기
+
+        let cont = document.getElementsByClassName('cont01')[0];
+        let contImg = cont.getElementsByTagName('img')[0];
+        let contMenu = cont.getElementsByTagName('li');
+
+
+        let i = 0;
+
+        contMenu[0].style.borderBottom = '1px solid #b34343';
+        for (i; i < contMenu.length; i++) {
+            console.log(i)
+            let num = i + 1;
+            let imgChange = 'img/a' + num + '.jpg';
+            //문자는 ''로 잡아줘야함
+            contMenu[i].onclick = function () {
+                console.log(i)
+                contImg.src = imgChange;
+
+                contMenu[0].style.borderBottom = '1px solid #fff';
+                contMenu[1].style.borderBottom = '1px solid #fff';
+                contMenu[2].style.borderBottom = '1px solid #fff';
+
+                this.style.borderBottom = '1px solid #b34343';
+
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>
